@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Card Component</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .pricing {
+            width: 100%;
+            max-width: 300px;
+            padding: 24px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0 0 15px;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #15803d;
+            margin: 0 0 20px;
+        }
+
+        .price span {
+            font-size: 14px;
+            font-weight: normal;
+            color: #666;
+        }
+
+        .features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px;
+        }
+
+        .features li {
+            padding: 12px 4px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            background-color: #2563eb;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .btn:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 24px 16px;
+            }
+
+            .pricing {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="pricing-container" id="pricing-container"></main>
+
+    <script>
+        // Reusable pricing card component
+        function Card(title, price, features) {
+            const card = document.createElement("article");
+            card.className = "pricing";
+
+            const heading = document.createElement("h2");
+            heading.className = "title";
+            heading.textContent = title;
+
+            const priceElement = document.createElement("p");
+            priceElement.className = "price";
+            priceElement.textContent = price;
+
+            const featureList = document.createElement("ul");
+            featureList.className = "features";
+
+            features.forEach(feature => {
+                const item = document.createElement("li");
+                item.textContent = feature;
+                featureList.appendChild(item);
+            });
+
+            const button = document.createElement("button");
+            button.className = "btn";
+            button.textContent = "Start Trial";
+
+            button.addEventListener("click", () => {
+                alert(`You selected the ${title} plan.`);
+            });
+
+            card.append(
+                heading,
+                priceElement,
+                featureList,
+                button
+            );
+
+            return card;
+        }
+
+        // Create a pricing card using the component
+        const basicCard = Card(
+            "Basic Plan",
+            "$9.99 /month",
+            [
+                "1 GB Storage",
+                "Basic Support",
+                "All Core Features"
+            ]
+        );
+
+        // Add the card to the webpage
+        document
+            .getElementById("pricing-container")
+            .appendChild(basicCard);
+    </script>
+
+</body>
+</html>
